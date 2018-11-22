@@ -47,7 +47,8 @@
 在以下示例中，迭代持续300毫秒或直到加载了200项目：
 ```
   proxy_cache_path / data / nginx / cache keys_zone = one：10m loader_threshold = 300 loader_files = 200 ;
-  
+```
+
 ### 指定要缓存的请求
 
 默认情况下，NGINX Plus会在第一次从代理服务器收到此类响应时，缓存对使用HTTP GET和HEAD方法发出的请求的所有响应。 作为请求的密钥（标识符），NGINX Plus使用请求字符串。 如果请求具有与缓存响应相同的密钥，则NGINX Plus会将缓存的响应发送到客户端。 您可以在http {} ， server {}或location {}上下文中包含各种指令，以控制缓存哪些响应。

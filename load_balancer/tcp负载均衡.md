@@ -176,9 +176,7 @@ stream {
 
 三个server块定义了三个虚拟服务器：
 
-* 第一个服务器侦听端口12345并代理到stream_backend上游服务器组的所有TCP连接。 请注意，在stream模块的上下文中定义的proxy_pass指令不得包含协议。
-
-指定了两个可选的超时参数： proxy_connect_timeout指令设置与stream_backend组中的服务器建立连接所需的超时。 proxy_timeout指令设置代理到stream_backend组中的一个服务器启动后使用的超时。
+* 第一个服务器侦听端口12345并代理到stream_backend上游服务器组的所有TCP连接。 请注意，在stream模块的上下文中定义的proxy_pass指令不得包含协议。指定了两个可选的超时参数： proxy_connect_timeout指令设置与stream_backend组中的服务器建立连接所需的超时。 proxy_timeout指令设置代理到stream_backend组中的一个服务器启动后使用的超时。
 
 * 第二个服务器侦听端口53，并将所有UDP数据报（ listen指令的udp参数）代理到名为dns_servers的上游组。 如果未指定udp参数，则套接字将侦听TCP连接。
 

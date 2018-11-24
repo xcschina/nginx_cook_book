@@ -129,14 +129,16 @@ typedef enum {
 ```
 
 ## 按阶段处理http请求
-
+```Shell
 0. NGX_HTTP_POST_READ_PHASE 接收到完整的HTTP头部后处理的阶段，也就是http模块正式开始处理的阶段
 
 * 包含 ngx_http_realip_handler 模块
 
 * checker() 时调用默认的函数 ngx_http_core_generic_phase 。也就相当于直接调用了 ngx_http_realip_handler 函数
 
-* ngx_http_realip_handler 模块是为了获取真实的客户端ip地址。有些请求是代理服务器转发的，代理服务器会在http请求头中包含真实客户端ip，有时候ip会有多个。
+* ngx_http_realip_handler 模块是为了获取真实的客户端ip地址。有些请求是代理服务器转发的，代理服务器会在http请求头中包含真实客户端ip，有时候ip会有多个。本模块将客户端真实ip从header取出来设置到连接对象中。
+```
+
 
 1. NGX_HTTP_SERVER_REWRITE_PHASE URI与location匹配前，修改URI的阶段，用于重定向
 

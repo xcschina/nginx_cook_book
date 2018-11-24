@@ -1,6 +1,16 @@
 nginx源码导读
 
 1、main 函数逻辑
+```
+int main() {
+    if (ngx_process == NGX_PROCESS_SINGLE) {
+        ngx_single_process_cycle(cycle);
+
+    } else {
+        ngx_master_process_cycle(cycle);
+    }
+}
+```
 
 2、master 进程的循环 ngx_master_process_cycle
 	a、启动工作进程 ngx_start_worker_processes
@@ -43,7 +53,7 @@ nginx源码导读
 
             ngx_cycle = cycle;
         }
-		// 如果重新打开
+	// 如果重新打开
         if (ngx_reopen) {
             ngx_reopen = 0;
             ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");

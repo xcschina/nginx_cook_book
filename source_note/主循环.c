@@ -1,8 +1,8 @@
 nginx源码导读
 
-1、main函数逻辑
+1、main 函数逻辑
 
-2、主进程的循环ngx_master_process_cycle
+2、master 进程的循环 ngx_master_process_cycle
 	a、启动工作进程 ngx_start_worker_processes
 	b、启动缓存管理进程 ngx_start_cache_manager_processes
 	c、死循环
@@ -16,12 +16,12 @@ nginx源码导读
 		// 如果配置改变，通知工作进程
 	}
 	
-3、工作进程的循环，核心在 ngx_process_events_and_timers
-	for ( ;; ) {
-		// 处理事件和定时器
+3、worker 进程的循环，核心在 ngx_process_events_and_timers
+    for ( ;; ) {
+	// 处理事件和定时器
         ngx_process_events_and_timers(cycle);
 
-		// 如果退出，调用各模块的退出函数
+	// 如果退出，调用各模块的退出函数
         if (ngx_terminate || ngx_quit) {
             for (i = 0; cycle->modules[i]; i++) {
                 if (cycle->modules[i]->exit_process) {
@@ -30,7 +30,7 @@ nginx源码导读
             }
             ngx_master_process_exit(cycle);
         }
-		// 如果重新配置
+	// 如果重新配置
         if (ngx_reconfigure) {
             ngx_reconfigure = 0;
             ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reconfiguring");

@@ -2,7 +2,7 @@
 
 ### 主要概念
 
-1. 多进程？多线程?
+#### 1. 多进程？多线程?
 
   多进程 + 多线程。nginx 进程组包含三种进程：master、worker、cache manager。
   

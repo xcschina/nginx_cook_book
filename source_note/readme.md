@@ -2,7 +2,7 @@
 
 #### 1. 多进程？多线程?
 
-  多进程 + 多线程。nginx 进程组包含三种进程：master、worker、cache manager。
+  多进程 + 多线程。nginx 进程组包含三种进程:
   
   * master 进行启动、退出、控制等工作。启动过程它负责启动其它进程；接收到控制命令后，它负责将命令发送到其它进程。
   
@@ -19,6 +19,6 @@
 
 * nginx 支持select、epoll、devpoll、kqueue、win32_select 等事件处理接口。
 
-* 所有工作线程都能处理监听套接字的连接事件，它们之间通过锁来控制，同一时间只有一个进程处理连接事件。 详见：进程间争抢accept锁 worker进程抢accept锁.c
+* 所有工作线程都能处理监听套接字的连接事件，它们之间通过锁来控制，同一时间只有一个进程处理连接事件。 详见：进程间争抢[accept锁 worker进程抢accept锁.c]([accept锁 worker进程抢accept锁.c)
 
-* 
+* [accept过程](accept过程.md)

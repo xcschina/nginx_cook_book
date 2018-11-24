@@ -13,12 +13,18 @@
 
 ## nginx源码导读
 
-1. 主线程逻辑：master进程主要是等待控制命令，收到命令后分发给其它工作进程。worker进程通过事件系统处理套接字、定时器事件、控制命令。详情见：[主循环.c](主循环.md)。工作线程为一个for死循环，不断地调用事件处理接口监听事件的发生、处理事件。详见：[ngx_process_events_and_timers.c](ngx_process_events_and_timers.c)
+1. 主线程逻辑：master进程主要是等待控制命令，收到命令后分发给其它工作进程。worker进程通过事件系统处理套接字、定时器事件、控制命令。详情见：[主循环.md](主循环.md)。工作线程为一个for死循环，不断地调用事件处理接口监听事件的发生、处理事件。详见：[ngx_process_events_and_timers.c](ngx_process_events_and_timers.c)
 
-2. socket 相关
+2. [nginx模块机制](模块.md)
+
+3. socket 相关
 
 * nginx 支持select、epoll、devpoll、kqueue、win32_select 等事件处理接口。
 
 * 所有工作线程都能处理监听套接字的连接事件，它们之间通过锁来控制，同一时间只有一个进程处理连接事件。 详见：进程间争抢[accept锁 worker进程抢accept锁.c]([accept锁 worker进程抢accept锁.c)
 
 * [accept过程](accept过程.md)
+
+4. http
+
+* [http整个流程阶段分析](http整个流程.md)

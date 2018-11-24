@@ -4,7 +4,7 @@
 
 ## http从监听到获取header完成
 
-1. 监听套接字读事件发生调用ngx_event_accept处理新连接
+### 1. 监听套接字读事件发生调用ngx_event_accept处理新连接
 
 * 创建 ngx_connection_t 对象
 
@@ -14,19 +14,19 @@
 
 * 投递"读请求”
 
-2. 超时或有读事件触发调用 ngx_http_wait_request_handler
+### 2. 超时或有读事件触发调用 ngx_http_wait_request_handler
 
 * 超时，关闭连接。
 
 * 非超时，设置”读事件“ handler为 ngx_http_process_request_line ，并调用 ngx_http_process_request_line
 
-3. ngx_http_process_request_line 主要解析请求行 GET /index.html HTTP/1.0
+### 3. ngx_http_process_request_line 主要解析请求行 GET /index.html HTTP/1.0
 
 * 解析请求行，如果报错，结束掉请求。
 
 * 如果解析成功，设置 读事件 handler 为 ngx_http_process_request_headers ，并调用
 
-4. ngx_http_process_request_headers 主要分两部
+### 4. ngx_http_process_request_headers 主要分两部
 
 * ngx_http_read_request_header 读取http header部分数据
 
@@ -34,19 +34,19 @@
 
 * 调用 ngx_http_process_request 处理请求
 
-5. ngx_http_process_request 函数处理
+### 5. ngx_http_process_request 函数处理
 
 * 将读写事件处理handler都设置为 ngx_http_process_request
 
 * 调用 ngx_http_handler
 
-6. ngx_http_handler 函数
+### 6. ngx_http_handler 函数
 
 * r->phase_handler = 0; 将处理步骤设为 NGX_HTTP_POST_READ_PHASE
 
 * 调用 ngx_http_core_run_phases
 
-7. ngx_http_core_run_phases 根据当前阶段，选择遍历当前阶段的 checker 链来处理。
+### 7. ngx_http_core_run_phases 根据当前阶段，选择遍历当前阶段的 checker 链来处理。
 ```C++
 void ngx_http_core_run_phases(ngx_http_request_t *r)
 {
@@ -70,7 +70,7 @@ void ngx_http_core_run_phases(ngx_http_request_t *r)
 }
 ```
 
-8. 默认 checker ngx_http_core_generic_phase ，直接调用handler，并将当前handler指向链表的下一个
+### 8. 默认 checker ngx_http_core_generic_phase ，直接调用handler，并将当前handler指向链表的下一个
 ```C++
 ngx_int_t ngx_http_core_generic_phase(ngx_http_request_t *r, ngx_http_phase_handler_t *ph)
 {
@@ -109,7 +109,7 @@ ngx_int_t ngx_http_core_generic_phase(ngx_http_request_t *r, ngx_http_phase_hand
 ```
 
 
-8. http阶段列表
+### 9. http阶段列表
 ```C++
 typedef enum {
     NGX_HTTP_POST_READ_PHASE = 0,   // 接收到完整的HTTP头部后处理的阶段

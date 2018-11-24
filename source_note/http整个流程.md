@@ -134,7 +134,7 @@ typedef enum {
 
 ## 按阶段处理http请求
 
-#### 0. NGX_HTTP_POST_READ_PHASE
+### 0. NGX_HTTP_POST_READ_PHASE
 
 * 接收到完整的HTTP头部后处理的阶段，也就是http模块正式开始处理的阶段
 
@@ -146,7 +146,7 @@ typedef enum {
 
 
 
-#### 1. NGX_HTTP_SERVER_REWRITE_PHASE
+### 1. NGX_HTTP_SERVER_REWRITE_PHASE
 
 * URI与location匹配前，修改URI的阶段，用于重定向
 

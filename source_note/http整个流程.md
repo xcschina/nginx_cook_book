@@ -1,3 +1,7 @@
+## 流程图：
+
+![request流程图](http_request解析过程.png)
+
 ## http从监听到获取header完成
 
 1. 监听套接字读事件发生调用ngx_event_accept处理新连接
@@ -130,7 +134,9 @@ typedef enum {
 
 ## 按阶段处理http请求
 
-### 0. NGX_HTTP_POST_READ_PHASE 接收到完整的HTTP头部后处理的阶段，也就是http模块正式开始处理的阶段
+#### 0. NGX_HTTP_POST_READ_PHASE
+
+* 接收到完整的HTTP头部后处理的阶段，也就是http模块正式开始处理的阶段
 
 * 包含 ngx_http_realip_handler 模块
 
@@ -140,7 +146,9 @@ typedef enum {
 
 
 
-### 1. NGX_HTTP_SERVER_REWRITE_PHASE URI与location匹配前，修改URI的阶段，用于重定向
+#### 1. NGX_HTTP_SERVER_REWRITE_PHASE
+
+* URI与location匹配前，修改URI的阶段，用于重定向
 
 * 包含 ngx_http_rewrite_module 模块 checker = ngx_http_core_rewrite_phase;
 ```C++

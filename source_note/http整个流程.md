@@ -109,23 +109,23 @@ ngx_int_t ngx_http_core_generic_phase(ngx_http_request_t *r, ngx_http_phase_hand
 ```
 
 
-### 9. http阶段列表
+### 9. http阶段列表，共11个阶段，有8个阶段可以插入自定义的模块。
 ```C++
 typedef enum {
     NGX_HTTP_POST_READ_PHASE = 0,   // 接收到完整的HTTP头部后处理的阶段
  
     NGX_HTTP_SERVER_REWRITE_PHASE,  // URI与location匹配前，修改URI的阶段，用于重定向
  
-    NGX_HTTP_FIND_CONFIG_PHASE,     // 根据URI寻找匹配的location块配置项
+    NGX_HTTP_FIND_CONFIG_PHASE,     // 根据URI寻找匹配的location块配置项，不可插入自定义模块
     NGX_HTTP_REWRITE_PHASE,         // 上一阶段找到location块后再修改URI
-    NGX_HTTP_POST_REWRITE_PHASE,    // 防止重写URL后导致的死循环
+    NGX_HTTP_POST_REWRITE_PHASE,    // 防止重写URL后导致的死循环 ，不可插入自定义模块
  
     NGX_HTTP_PREACCESS_PHASE,       // 下一阶段之前的准备
  
     NGX_HTTP_ACCESS_PHASE,          // 让HTTP模块判断是否允许这个请求进入Nginx服务器
-    NGX_HTTP_POST_ACCESS_PHASE,     // 向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝
+    NGX_HTTP_POST_ACCESS_PHASE,     // 向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝，不可插入自定义模块
  
-    NGX_HTTP_TRY_FILES_PHASE,       // 为访问静态文件资源而设置
+    NGX_HTTP_PRECONTENT_PHASE,       // 为访问静态文件资源而设置
     NGX_HTTP_CONTENT_PHASE,         // 处理HTTP请求内容的阶段，大部分HTTP模块介入这个阶段
  
     NGX_HTTP_LOG_PHASE              // 处理完请求后的日志记录阶段
